@@ -1,8 +1,11 @@
 import sys
-from PySide2.QtWidgets import QApplication, QMainWindow
+from PySide2.QtWidgets import QApplication, QMainWindow,QFileDialog
 from ui_media import Ui_MainWindow
 from PySide2.QtMultimedia import  QMediaPlayer,QMediaContent
-from PySide2.QtCore import QUrl
+from PySide2.QtCore import QUrl,QTime
+
+
+
 
 
 class MainWindow(QMainWindow):
@@ -15,6 +18,10 @@ class MainWindow(QMainWindow):
         self.mediaPlayer = QMediaPlayer()
         self.mediaPlayer.setVideoOutput(self.ui.ecranWidget)
 
+        #chargement du media
+        mediaContent = QMediaContent(QUrl.fromLocalFile("big_buck_bunny.avi"))
+        self.mediaPlayer.setMedia(mediaContent)
+
        #connect push boutons
         self.ui.pbLecture.clicked.connect(self.lectureClicked)
         self.ui.pbPause.clicked.connect(self.pauseClicked)
@@ -22,12 +29,13 @@ class MainWindow(QMainWindow):
         self.ui.dialVolume.valueChanged.connect(self.volControl)
         self.ui.nivoVolume.setText(str(self.ui.dialVolume.value()))
         self.ui.nivoVolume.setText('{}%'.format(str(self.ui.dialVolume.value())))
-        # self.ui.pbLecture.clicked.connect(self.bLectContrl)
-        # self.ui.pbLecture.clicked.connect(self.bLectContrl)
+        self.mediaPlayer.durationChanged.connect(self.affTemp)
+        self.mediaPlayer.positionChanged.connect(self.avanceTemp)
+        self.ui.barreLect.valueChanged.connect(self.avanceSlider)
+        self.ui.pbPlus.clicked.connect(self.pbPlusCtrl)
 
 
-        mediaContent = QMediaContent(QUrl.fromLocalFile("big_buck_bunny.avi"))
-        self.mediaPlayer.setMedia(mediaContent)
+
 
     #fonction qui gere les click
     def lectureClicked(self):
@@ -46,6 +54,39 @@ class MainWindow(QMainWindow):
     def volControl(self):
         self.mediaPlayer.setVolume(self.ui.dialVolume.value())
         self.ui.nivoVolume.setText('{}%'.format(str(self.ui.dialVolume.value())))
+
+    def affTemp(self):
+        tempTotl = QTime(0, 0, 0)
+        tempTotl = tempTotl.addMSecs(self.mediaPlayer.duration() - self.mediaPlayer.position())
+
+        posTemp = QTime(0, 0, 0)
+        posTemp = posTemp.addMSecs((self.mediaPlayer.position()))
+
+        self.ui.tempRestant.setText("- {}".format(tempTotl.toString("HH:mm:ss")))
+        self.ui.tempLecture.setText(posTemp.toString("HH:mm:ss"))
+        self.ui.barreLect.setRange(0,self.mediaPlayer.duration())
+
+    def avanceTemp(self):
+        tempTotl= QTime(0,0,0)
+        tempTotl = tempTotl.addMSecs(self.mediaPlayer.duration()-self.mediaPlayer.position())
+
+
+        posTemp= QTime(0,0,0)
+        posTemp = posTemp.addMSecs((self.mediaPlayer.position()))
+
+        self.ui.tempRestant.setText("-{}".format(tempTotl.toString("HH:mm:ss")))
+        self.ui.tempLecture.setText(posTemp.toString("HH:mm:ss"))
+        self.ui.barreLect.setSliderPosition(self.mediaPlayer.position())
+
+    def avanceSlider(self):
+        self.mediaPlayer.setPosition(self.ui.barreLect.sliderPosition())
+
+    def pbPlusCtrl(self):
+
+        fileName = QFileDialog.getOpenFileName(self,"/home")
+        self.ui.listWidget.addItems(fileName)
+
+
 
 
 
