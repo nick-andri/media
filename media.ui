@@ -18,7 +18,7 @@
     <item>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
-       <widget class="QWidget" name="ecranWidget" native="true">
+       <widget class="QVideoWidget" name="ecranWidget" native="true">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -72,7 +72,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="pbPause_2">
+         <widget class="QPushButton" name="pbStop">
           <property name="text">
            <string>Stop</string>
           </property>
@@ -214,7 +214,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QDial" name="dial"/>
+         <widget class="QDial" name="dialVolume"/>
         </item>
         <item>
          <widget class="QLabel" name="nivoVolume">
@@ -241,6 +241,14 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QVideoWidget</class>
+   <extends>QWidget</extends>
+   <header>PySide2.QtMultimediaWidgets</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'media.ui',
 # licensing of 'media.ui' applies.
 #
-# Created: Thu Jul 18 09:57:34 2019
+# Created: Thu Jul 18 12:21:24 2019
 #      by: pyside2-uic  running on PySide2 5.13.0
 #
 # WARNING! All changes made in this file will be lost!
@@ -20,7 +20,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout()
         self.verticalLayout_2.setObjectName("verticalLayout_2")
-        self.ecranWidget = QtWidgets.QWidget(self.centralwidget)
+        self.ecranWidget = QVideoWidget(self.centralwidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -50,9 +50,9 @@ class Ui_MainWindow(object):
         self.pbPause = QtWidgets.QPushButton(self.centralwidget)
         self.pbPause.setObjectName("pbPause")
         self.horizontalLayout_2.addWidget(self.pbPause)
-        self.pbPause_2 = QtWidgets.QPushButton(self.centralwidget)
-        self.pbPause_2.setObjectName("pbPause_2")
-        self.horizontalLayout_2.addWidget(self.pbPause_2)
+        self.pbStop = QtWidgets.QPushButton(self.centralwidget)
+        self.pbStop.setObjectName("pbStop")
+        self.horizontalLayout_2.addWidget(self.pbStop)
         self.pbPrecedent = QtWidgets.QPushButton(self.centralwidget)
         self.pbPrecedent.setObjectName("pbPrecedent")
         self.horizontalLayout_2.addWidget(self.pbPrecedent)
@@ -109,9 +109,9 @@ class Ui_MainWindow(object):
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
         self.label_2.setObjectName("label_2")
         self.horizontalLayout_4.addWidget(self.label_2)
-        self.dial = QtWidgets.QDial(self.centralwidget)
-        self.dial.setObjectName("dial")
-        self.horizontalLayout_4.addWidget(self.dial)
+        self.dialVolume = QtWidgets.QDial(self.centralwidget)
+        self.dialVolume.setObjectName("dialVolume")
+        self.horizontalLayout_4.addWidget(self.dialVolume)
         self.nivoVolume = QtWidgets.QLabel(self.centralwidget)
         self.nivoVolume.setObjectName("nivoVolume")
         self.horizontalLayout_4.addWidget(self.nivoVolume)
@@ -135,7 +135,7 @@ class Ui_MainWindow(object):
         self.tempRestant.setText(QtWidgets.QApplication.translate("MainWindow", "TextLabel", None, -1))
         self.pbLecture.setText(QtWidgets.QApplication.translate("MainWindow", "Lecture", None, -1))
         self.pbPause.setText(QtWidgets.QApplication.translate("MainWindow", "Pause", None, -1))
-        self.pbPause_2.setText(QtWidgets.QApplication.translate("MainWindow", "Stop", None, -1))
+        self.pbStop.setText(QtWidgets.QApplication.translate("MainWindow", "Stop", None, -1))
         self.pbPrecedent.setText(QtWidgets.QApplication.translate("MainWindow", "Precedent", None, -1))
         self.pbSuivant.setText(QtWidgets.QApplication.translate("MainWindow", "Suivant", None, -1))
         self.label.setText(QtWidgets.QApplication.translate("MainWindow", "Liste de lecture :", None, -1))
@@ -144,3 +144,4 @@ class Ui_MainWindow(object):
         self.label_2.setText(QtWidgets.QApplication.translate("MainWindow", "Volume :", None, -1))
         self.nivoVolume.setText(QtWidgets.QApplication.translate("MainWindow", "TextLabel", None, -1))
 
+from PySide2.QtMultimediaWidgets import QVideoWidget
